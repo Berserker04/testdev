@@ -1,9 +1,26 @@
-import {cleanConsole, createAll} from './data';
+import { cleanConsole, createAll } from './data';
 const companies = createAll();
 
 cleanConsole(2, companies);
-console.log('---- EXAMPLE 2 --- ', 'Put here your function');
+console.log('---- EXAMPLE 2 --- ', hasCar(companies, false));
 
+function hasCar(companies, hasCar) {
+  const data = [];
+  companies.forEach((c) => {
+    const users = [];
+    c.users.forEach((u) => {
+      if (u.car == hasCar) {
+        users.push(u);
+      };
+    });
+    data.push({
+      name: c.name,
+      users: users,
+      usersLength: users.length,
+    })
+  });
+  return data;
+}
 // -----------------------------------------------------------------------------
 // INSTRUCCIONES EN ESPAÑOL
 
