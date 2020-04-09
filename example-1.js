@@ -1,9 +1,45 @@
-import {createAll, cleanConsole} from './data';
+import { createAll, cleanConsole } from './data';
 const companies = createAll();
 
 cleanConsole(1, companies);
-console.log('---- EXAMPLE 1 --- ', 'Put here your function');
+console.log('---- EXAMPLE 1 --- ', orderData(companies));
 
+export function orderData(data) {
+  data.forEach((c, i)=> {
+    data[i].name = firstMayus(c.name);
+    data[i].users.forEach((u, l)=> {
+      data[i].users[l].firstName = isUundefine(u.firstName);
+      data[i].users[l].lastName = isUundefine(u.lastName);
+      data[i].users[l].firstName = firstMayus(u.firstName);
+      data[i].users[l].lastName = firstMayus(u.lastName);
+    });
+    data[i].users.sort(function(a, b) {
+      if (a.firstName > b.firstName) {
+        return 1;
+      }
+      if (a.firstName < b.firstName) {
+        return -1;
+      }
+      return 0;
+    });
+  });
+  data.sort(function(a, b) {
+    return b.usersLength - a.usersLength;
+  });
+  return data;
+}
+
+function firstMayus(value) {
+  value = value.charAt(0).toUpperCase() + value.substr(1).toLowerCase();
+  return value;
+}
+
+function isUundefine(value) {
+  if (!value) {
+    value = '';
+  };
+  return value;
+}
 // -----------------------------------------------------------------------------
 // INSTRUCCIONES EN ESPAÑOL
 
