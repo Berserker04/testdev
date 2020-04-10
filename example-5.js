@@ -5,7 +5,27 @@ const companies = createAll();
 cleanConsole(5, companies);
 console.log('---- EXAMPLE 5 --- ', statistics(companies));
 
-
+function statistics(companies) {
+  const users = allUsers(companies);
+  let sumAge = 0;
+  let sumCar = 0;
+  let hasCar = 0;
+  users.forEach((user)=>{
+    if (user.car == true) {
+      sumCar += user.age;
+      hasCar ++;
+    }
+    sumAge += user.age;
+  });
+  const average = parseInt( sumAge / users.length);
+  const averageWithCar = parseInt( sumCar / hasCar);
+  return {
+    size: users.length,
+    average,
+    hasCar,
+    averageWithCar,
+  };
+}
 // -----------------------------------------------------------------------------
 // INSTRUCCIONES EN ESPAÑOL
 
