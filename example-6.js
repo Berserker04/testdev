@@ -10,7 +10,7 @@ function users(params) {
   const users = allUsers(params);
   const resolve ={};
   users.forEach((user)=>{
-    usersFinal[user.firstName + user.lastName + user.age] = user.car;
+    resolve[user.firstName + user.lastName + user.age] = user.car;
   });
   return resolve;
 }

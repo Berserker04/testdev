@@ -1,18 +1,84 @@
 import {cleanConsole, createAll} from './data';
-
 const companies = createAll();
+const nuwUser = {
+  firstName: 'Juan',
+  lastName: 'Delgado',
+  age: 35,
+  car: true,
+};
 
 cleanConsole(7, companies);
-console.log('---- EXAMPLE 7 part 1 --- ', 'Put here your function');
-console.log('---- EXAMPLE 7 part 2 --- ', 'Put here your function');
+console.log('---- EXAMPLE 7 part 1 --- ', searchCompany(companies, 5));
+console.log('---- EXAMPLE 7 part 2 --- ', deleteOneCompany(companies, 7));
 console.log('---- EXAMPLE 7 part 3 --- ', 'Put here your function');
-console.log('---- EXAMPLE 7 part 4 --- ', 'Put here your function');
+console.log('---- EXAMPLE 7 part 4 --- ', addUser(companies, 2, nuwUser));
 console.log('---- EXAMPLE 7 part 5 --- ', 'Put here your function');
-console.log('---- EXAMPLE 7 part 6 --- ', 'Put here your function');
+console.log('---- EXAMPLE 7 part 6 --- ', deleteOneUser(companies, 4, 7));
 console.log('---- EXAMPLE 7 part 7 --- ', 'Put here your function');
 console.log('---- EXAMPLE 7 part 8 --- ', 'Put here your function');
-console.log('---- EXAMPLE 7 part 9 --- ', 'Put here your function');
-
+console.log('---- EXAMPLE 7 part 9 --- ', transferUser(companies, 2, 3, 5));
+// point 1
+function searchCompany(companies, id) {
+  const company = companies.find((data) => data.id == id);
+  return company ? company.name : 'company not found';
+}
+// point 2
+function deleteOneCompany(companies, id) {
+  return companies.filter((data) => data.id != id);
+}
+// point 4
+function addUser(companies, id, user) {
+  const company = companies.find((data) => data.id == id);
+  if (company) {
+    user.id = company.users.length;
+    company.users.push(user);
+    company.usersLength ++;
+    return company;
+  }
+  return 'company not found';
+}
+// point 6
+function deleteOneUser(companies, idCompany, idUser) {
+  const company = companies.find((data) => data.id == idCompany);
+  const company0 = company;
+  if (company) {
+    const indexUser = company.users.indexOf((data) => data.id == idUser);
+    if (indexUser == -1) {
+      return 'user not found';
+    }
+    company.splice(indexUser, 1);
+    company.usersLength --;
+  } else {
+    return 'company1 or company2 not found';
+  }
+  return {
+    'companay after': company,
+    'companay before': company0,
+  };
+}
+// point 9
+function transferUser(companies, idCom1, idCom2, idUser) {
+  const company1 = companies.find((data) => data.id == idCom1);
+  const company2 = companies.find((data) => data.id == idCom2);
+  const company = company1;
+  if (company1 && company2) {
+    const indexUser = company1.users.indexOf((data) => data.id == idUser);
+    if (indexUser == -1) {
+      return 'user not found';
+    }
+    const userDeleted = company1.splice(indexUser, 1);
+    company2.users.push(userDeleted);
+    company1.usersLength --;
+    company2.usersLength ++;
+  } else {
+    return 'company1 or company2 not found';
+  }
+  return {
+    'companay1 after': company,
+    'companay1 before': company1,
+    'companay2': company2,
+  };
+}
 // -----------------------------------------------------------------------------
 // INSTRUCCIONES EN ESPAÑOL
 
