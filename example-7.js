@@ -42,11 +42,11 @@ function deleteOneUser(companies, idCompany, idUser) {
   const company = companies.find((data) => data.id == idCompany);
   const company0 = company;
   if (company) {
-    const indexUser = company.users.indexOf((data) => data.id == idUser);
+    const indexUser = company.users.findIndex((data) => data.id == idUser);
     if (indexUser == -1) {
       return 'user not found';
     }
-    company.splice(indexUser, 1);
+    company.users.splice(indexUser, 1);
     company.usersLength --;
   } else {
     return 'company1 or company2 not found';
@@ -62,12 +62,12 @@ function transferUser(companies, idCom1, idCom2, idUser) {
   const company2 = companies.find((data) => data.id == idCom2);
   const company = company1;
   if (company1 && company2) {
-    const indexUser = company1.users.indexOf((data) => data.id == idUser);
+    const indexUser = company1.users.findIndex((data) => data.id == idUser);
     if (indexUser == -1) {
       return 'user not found';
     }
-    const userDeleted = company1.splice(indexUser, 1);
-    company2.users.push(userDeleted);
+    const userDeleted = company1.users.splice(indexUser, 1);
+    company2.users.push(userDeleted[0]);
     company1.usersLength --;
     company2.usersLength ++;
   } else {
