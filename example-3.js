@@ -1,10 +1,53 @@
 import {cleanConsole, createAll} from './data';
-
+import {orderData} from './example-1';
 const companies = createAll();
 
 cleanConsole(3, companies);
-console.log('---- EXAMPLE 3 --- ', 'Put here your function');
+console.log('---- EXAMPLE 3 --- ', validateMayus(companies));
 
+function validateMayus(req) {
+  const companyOrder = orderData(req);
+  req = orderCompany(req);
+  const resolve = [];
+  let validate = false;
+  for (let i = 0; i < req.length; i++) {
+    if (req[i].name == companyOrder[i].name) {
+      for (let l = 0; l < req[i].users.length; l++) {
+        const firstName = req[i].users[l].firstName;
+        const lastName = req[i].users[l].lastName;
+        const firstName2 = companyOrder[i].users[l].firstName;
+        const lastName2 = companyOrder[i].users[l].lastName;
+        if ((firstName == firstName2) && (lastName == lastName2)) {
+          validate = true;
+        };
+      }
+    };
+    resolve.push({
+      name: req[i].name,
+      validate,
+    });
+    validate = false;
+  }
+  return resolve;
+}
+
+export function orderCompany(data) {
+  data.forEach((c, i)=> {
+    data[i].users.sort(function(a, b) {
+      if (a.firstName > b.firstName) {
+        return 1;
+      }
+      if (a.firstName < b.firstName) {
+        return -1;
+      }
+      return 0;
+    });
+  });
+  data.sort(function(a, b) {
+    return b.usersLength - a.usersLength;
+  });
+  return data;
+}
 // -----------------------------------------------------------------------------
 // INSTRUCCIONES EN ESPAÑOL
 

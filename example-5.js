@@ -1,8 +1,10 @@
 import {cleanConsole, createAll} from './data';
+import {allUsers} from './example-4';
 const companies = createAll();
 
 cleanConsole(5, companies);
-console.log('---- EXAMPLE 5 --- ', 'Put here your function');
+console.log('---- EXAMPLE 5 --- ', statistics(companies));
+
 
 // -----------------------------------------------------------------------------
 // INSTRUCCIONES EN ESPAÑOL

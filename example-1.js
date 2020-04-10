@@ -1,4 +1,4 @@
-import { createAll, cleanConsole } from './data';
+import {createAll, cleanConsole} from './data';
 const companies = createAll();
 
 cleanConsole(1, companies);

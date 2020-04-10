@@ -1,12 +1,12 @@
-import { cleanConsole, createAll } from './data';
+import {cleanConsole, createAll} from './data';
 const companies = createAll();
 
 cleanConsole(2, companies);
 console.log('---- EXAMPLE 2 --- ', hasCar(companies, false));
 
-function hasCar(companies, hasCar) {
+function hasCar(req, hasCar) {
   const data = [];
-  companies.forEach((c) => {
+  req.forEach((c) => {
     const users = [];
     c.users.forEach((u) => {
       if (u.car == hasCar) {
@@ -17,7 +17,7 @@ function hasCar(companies, hasCar) {
       name: c.name,
       users: users,
       usersLength: users.length,
-    })
+    });
   });
   return data;
 }
