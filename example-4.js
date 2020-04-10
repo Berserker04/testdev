@@ -3,7 +3,24 @@ const companies = createAll();
 
 cleanConsole(4, companies);
 console.log('---- EXAMPLE 4 --- ', allUsers(companies));
-
+export function allUsers(data) {
+  const allUsers = [];
+  data.forEach((company) => {
+    company.users.forEach(((user) => {
+      allUsers.push({
+        firstName: user.firstName,
+        lastName: user.lastName,
+        company: company.name,
+        age: user.age,
+        car: user.car,
+      });
+    }));
+  });
+  allUsers.sort(function(a, b) {
+    return b.age - a.age;
+  });
+  return allUsers;
+}
 // -----------------------------------------------------------------------------
 // INSTRUCCIONES EN ESPAÑOL
 
