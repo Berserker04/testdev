@@ -1,10 +1,19 @@
 import {cleanConsole, createAll} from './data';
+import {allUsers} from './example-4';
 
 const companies = createAll();
 
 cleanConsole(6, companies);
-console.log('---- EXAMPLE 6 --- ', 'Put here your function');
+console.log('---- EXAMPLE 6 --- ', users(companies));
 
+function users(params) {
+  const users = allUsers(params);
+  const resolve ={};
+  users.forEach((user)=>{
+    usersFinal[user.firstName + user.lastName + user.age] = user.car;
+  });
+  return resolve;
+}
 // -----------------------------------------------------------------------------
 // INSTRUCCIONES EN ESPAÑOL
 
